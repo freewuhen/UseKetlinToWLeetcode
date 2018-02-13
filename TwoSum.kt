@@ -1,19 +1,17 @@
 class Solution {
     fun twoSum(nums: IntArray, target: Int): IntArray {
-        val re =    IntArray(2)
-
+        var re =    IntArray(2)
+        var map:HashMap<Int,Int> = hashMapOf()
+        for (i in 0..nums.size-1)
+            map.put(nums[i],i)
         for(i in 0..nums.size-1)
         {
             re[0] = i;
-            var f = target - nums[i];
-            for(j in 0..nums.size-1)
+            var aim:Int = target - nums[i];
+            if (map.containsKey(aim) && map.get(aim) != i)
             {
-                if(nums[j] == f)
-                {
-                    if(i == j) continue;
-                    re[1] = j;
-                    return re;//found the two num
-                }
+                re[1] = map.get(aim)!!
+                return re
             }
         }
         re[0] = -1
@@ -24,9 +22,10 @@ class Solution {
 }
 fun main(args:Array<String>)
 {
-    val s = Solution()
-    val nums:IntArray = intArrayOf(3,2,4)
-    val re = s.twoSum(nums,6)
+
+    var s = Solution()
+    var nums:IntArray = intArrayOf(3,2,4)
+    var re = s.twoSum(nums,6)
     print("${re[0]},${re[1]}")
 
 
